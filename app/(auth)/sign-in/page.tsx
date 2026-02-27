@@ -3,6 +3,7 @@ import { useAuth } from '@/context/AuthContext'
 import { redirect } from 'next/dist/server/api-utils';
 import React, { useActionState } from 'react'
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 
@@ -30,7 +31,7 @@ function SignIn() {
                 }
 
                 if(success && data?.session){
-                 router.push('/sign-up');
+                 router.push('/dashboard');
                  console.log("Successful signIn")
                     return null
                 }
@@ -47,18 +48,17 @@ function SignIn() {
   return (
     <div>
       <div>
-        <h1>Sign In to Mboa flow</h1>
+        <h1 className='my-2 text-4xl text-center'>Sign In</h1>
         <form action= {submitAction}>
             <div>
-                Use this form to sign in to your account
             </div>
             <h2>
                 Sign In
             </h2>
-            {/* <p>
+            <p>
                 Don't have an account yet?
-                <Link to='/signup'>Sign up</Link>
-            </p> */}
+                <Link href='/sign-up'>Sign up</Link>
+            </p> 
 
             <label htmlFor="email">Email</label> <br />
             <input

@@ -54,11 +54,40 @@ export const AuthContextProvider = ({children}:{children:ReactNode})=>{
             }
         }
 
+        
+        const signUpUser = async (email: string, password:string, name:string, accountType: string)=>{
+        try {
+            const {data, error} =await supabaseClient.auth.signUp({
+                    email: email.toLowerCase(),
+                    password: password,
+                    options: {
+                        data:{
+                            name: name,
+                            account_type: accountType,
+                        }
+                    }
+                })
+                if(error){
+                    console.error('Supabase sign-up error:', error.message)
+                        return {sucess: false, error: error.message}
+                }
+                console.log('Supabase sigin-up success', data)
+                  setSession(data.session)
+                return{success: true, data}
+              
+                   } catch (error) {
+                 const message = error instanceof Error ? error.message : String(error);
+                 console.error("Unexpected error during sign-up", message)
+                  return{success: false, error: 'An unexpected error occured please try again'}
+            }
+        }
+
+
     
 
 
     return (
-    <AuthContext.Provider value ={{session, signInUser}}>
+    <AuthContext.Provider value ={{session, signInUser, signUpUser}}>
         {children}
     </AuthContext.Provider>
     )
