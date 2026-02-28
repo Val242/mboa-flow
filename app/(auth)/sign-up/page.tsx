@@ -46,7 +46,7 @@ export default function SignUp() {
         console.log(session)
   return (
       <div>
-        <h1 className='my-2 text-4xl text-center'>Sign up today!</h1>
+        <h1 className='my-2 text-4xl text-center'>Sign up (Log in) today!</h1>
         <form action={submitAction}>
 
              <div className='mb-2'>
